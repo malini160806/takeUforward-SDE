@@ -1,0 +1,46 @@
+function merge(arr1, arr2) {
+    let n = arr1.length;
+    let m = arr2.length;
+
+    let len = n + m;
+
+    let gap = Math.ceil(len / 2);
+
+    while (gap > 0) {
+
+        let left = 0;
+        let right = left + gap;
+
+        while (right < len) {
+
+            if (left < n && right >= n) {
+
+                if (arr1[left] > arr2[right - n]) {
+                    [arr1[left], arr2[right - n]] =
+                    [arr2[right - n], arr1[left]];
+                }
+
+            } else if (left >= n) {
+
+                if (arr2[left - n] > arr2[right - n]) {
+                    [arr2[left - n], arr2[right - n]] =
+                    [arr2[right - n], arr2[left - n]];
+                }
+
+            } else {
+
+                if (arr1[left] > arr1[right]) {
+                    [arr1[left], arr1[right]] =
+                    [arr1[right], arr1[left]];
+                }
+            }
+
+            left++;
+            right++;
+        }
+
+        if (gap === 1) break;
+
+        gap = Math.ceil(gap / 2);
+    }
+}
