@@ -1,0 +1,26 @@
+class Solution {
+    findMissingRepeatingNumbers(nums) {
+        const n = nums.length;
+
+        let actualSum = 0;
+        let actualSqSum = 0;
+
+        for (let num of nums) {
+            actualSum += num;
+            actualSqSum += num * num;
+        }
+
+        const expectedSum = (n * (n + 1)) / 2;
+        const expectedSqSum = (n * (n + 1) * (2 * n + 1)) / 6;
+
+        const diff = expectedSum - actualSum; 
+        const sqDiff = expectedSqSum - actualSqSum;
+
+        const sum = sqDiff / diff; 
+
+        const missing = (diff + sum) / 2;
+        const repeating = sum - missing;
+
+        return [repeating, missing];
+    }
+}
