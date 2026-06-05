@@ -1,0 +1,30 @@
+var searchMatrix = function(matrix, target) {
+
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+
+    let low = 0;
+    let high = rows * cols - 1;
+
+    while (low <= high) {
+
+        const mid = Math.floor((low + high) / 2);
+
+        const row = Math.floor(mid / cols);
+        const col = mid % cols;
+
+        const value = matrix[row][col];
+
+        if (value === target) {
+            return true;
+        }
+
+        if (value < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    return false;
+};
