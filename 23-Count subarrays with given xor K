@@ -1,0 +1,25 @@
+class Solution {
+    subarraysWithXorK(nums, k) {
+        let map = new Map();
+
+        map.set(0, 1);
+
+        let xr = 0;
+        let count = 0;
+
+        for (let num of nums) {
+
+            xr ^= num;
+
+            let x = xr ^ k;
+
+            if (map.has(x)) {
+                count += map.get(x);
+            }
+
+            map.set(xr, (map.get(xr) || 0) + 1);
+        }
+
+        return count;
+    }
+}
