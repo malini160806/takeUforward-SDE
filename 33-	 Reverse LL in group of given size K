@@ -1,0 +1,32 @@
+var reverseKGroup = function(head, k) {
+
+    let curr = head;
+    let count = 0;
+
+    while (curr && count < k) {
+        curr = curr.next;
+        count++;
+    }
+
+    if (count < k) return head;
+
+    let prev = null;
+    curr = head;
+    let next = null;
+    count = 0;
+
+    while (curr && count < k) {
+
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+
+    if (next !== null) {
+        head.next = reverseKGroup(next, k);
+    }
+
+    return prev;
+};
