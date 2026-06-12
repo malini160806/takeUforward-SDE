@@ -1,0 +1,33 @@
+class Solution {
+
+    merge(a, b) {
+
+        if (a === null) return b;
+        if (b === null) return a;
+
+        let result = null;
+
+        if (a.data <= b.data) {
+            result = a;
+            result.child = this.merge(a.child, b);
+        } else {
+            result = b;
+            result.child = this.merge(a, b.child);
+        }
+
+        result.next = null;
+
+        return result;
+    }
+
+    flattenLinkedList(head) {
+
+        if (head === null || head.next === null) {
+            return head;
+        }
+
+        head.next = this.flattenLinkedList(head.next);
+
+        return this.merge(head, head.next);
+    }
+}
