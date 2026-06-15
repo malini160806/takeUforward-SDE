@@ -1,0 +1,27 @@
+class Solution {
+    findPlatform(arr, dep, n) {
+
+        arr.sort((a, b) => a - b);
+        dep.sort((a, b) => a - b);
+
+        let i = 0;
+        let j = 0;
+
+        let platforms = 0;
+        let maxPlatforms = 0;
+
+        while (i < n && j < n) {
+
+            if (arr[i] <= dep[j]) {
+                platforms++;
+                maxPlatforms = Math.max(maxPlatforms, platforms);
+                i++;
+            } else {
+                platforms--;
+                j++;
+            }
+        }
+
+        return maxPlatforms;
+    }
+}
