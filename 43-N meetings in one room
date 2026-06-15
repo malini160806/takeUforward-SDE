@@ -1,0 +1,25 @@
+class Solution {
+    maxMeetings(start, end, n) {
+
+        let meetings = [];
+
+        for (let i = 0; i < n; i++) {
+            meetings.push([start[i], end[i]]);
+        }
+
+        meetings.sort((a, b) => a[1] - b[1]);
+
+        let count = 1;
+        let lastEnd = meetings[0][1];
+
+        for (let i = 1; i < n; i++) {
+
+            if (meetings[i][0] > lastEnd) {
+                count++;
+                lastEnd = meetings[i][1];
+            }
+        }
+
+        return count;
+    }
+}
