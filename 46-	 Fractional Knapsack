@@ -1,0 +1,29 @@
+class Solution {
+
+    fractionalKnapsack(W, arr, n) {
+
+        arr.sort((a, b) =>
+            (b.value / b.weight) - (a.value / a.weight)
+        );
+
+        let totalValue = 0;
+
+        for (let item of arr) {
+
+            if (W >= item.weight) {
+
+                totalValue += item.value;
+                W -= item.weight;
+
+            } else {
+
+                totalValue +=
+                    (item.value / item.weight) * W;
+
+                break;
+            }
+        }
+
+        return totalValue;
+    }
+}
