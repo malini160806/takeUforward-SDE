@@ -1,0 +1,42 @@
+var combinationSum2 = function(candidates, target) {
+
+    candidates.sort((a, b) => a - b);
+
+    let result = [];
+
+    function backtrack(start, current, targetLeft) {
+
+        if (targetLeft === 0) {
+            result.push([...current]);
+            return;
+        }
+
+        for (let i = start; i < candidates.length; i++) {
+
+            if (
+                i > start &&
+                candidates[i] === candidates[i - 1]
+            ) {
+                continue;
+            }
+
+            if (candidates[i] > targetLeft) {
+                break;
+            }
+
+            current.push(candidates[i]);
+
+            backtrack(
+                i + 1,
+                current,
+                targetLeft - candidates[i]
+            );
+
+            current.pop();
+        }
+    }
+
+    backtrack(0, [], target);
+
+    return result;
+};
