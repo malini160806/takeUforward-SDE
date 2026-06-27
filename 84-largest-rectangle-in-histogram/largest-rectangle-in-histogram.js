@@ -1,0 +1,17 @@
+var largestRectangleArea = function(heights) {
+    let stack = [];
+    let maxArea = 0;
+
+    heights.push(0);
+
+    for (let i = 0; i < heights.length; i++) {
+        while (stack.length && heights[stack[stack.length - 1]] > heights[i]) {
+            let h = heights[stack.pop()];
+            let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+            maxArea = Math.max(maxArea, h * width);
+        }
+        stack.push(i);
+    }
+
+    return maxArea;
+};
