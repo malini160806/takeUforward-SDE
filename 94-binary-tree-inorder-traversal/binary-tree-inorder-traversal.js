@@ -1,4 +1,3 @@
-
 var inorderTraversal = function(root) {
     const result = [];
 
