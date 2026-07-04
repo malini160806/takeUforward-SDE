@@ -1,14 +1,28 @@
 var inorderTraversal = function(root) {
-    const result = [];
+    const ans = [];
+    let curr = root;
 
-    function dfs(node) {
-        if (node === null) return;
+    while (curr) {
+        if (!curr.left) {
+            ans.push(curr.val);
+            curr = curr.right;
+        } else {
+            let prev = curr.left;
 
-        dfs(node.left);
-        result.push(node.val);
-        dfs(node.right);
+            while (prev.right && prev.right !== curr) {
+                prev = prev.right;
+            }
+
+            if (!prev.right) {
+                prev.right = curr;
+                curr = curr.left;
+            } else {
+                prev.right = null;
+                ans.push(curr.val);
+                curr = curr.right;
+            }
+        }
     }
 
-    dfs(root);
-    return result;
+    return ans;
 };
