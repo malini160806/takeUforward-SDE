@@ -5,14 +5,16 @@
  */
 var canFinish = function(numCourses, prerequisites) {
 
-    const adj = Array.from({ length: numCourses }, () => []);
+    const graph = Array.from({ length: numCourses }, () => []);
     const indegree = new Array(numCourses).fill(0);
 
+    // Build graph
     for (const [course, pre] of prerequisites) {
-        adj[pre].push(course);
+        graph[pre].push(course);
         indegree[course]++;
     }
 
+    // Queue of courses with no prerequisites
     const queue = [];
 
     for (let i = 0; i < numCourses; i++) {
@@ -21,20 +23,21 @@ var canFinish = function(numCourses, prerequisites) {
         }
     }
 
-    let count = 0;
+    let completed = 0;
+    let front = 0;
 
-    while (queue.length) {
-        const node = queue.shift();
-        count++;
+    while (front < queue.length) {
+        const node = queue[front++];
+        completed++;
 
-        for (const nei of adj[node]) {
-            indegree[nei]--;
+        for (const next of graph[node]) {
+            indegree[next]--;
 
-            if (indegree[nei] === 0) {
-                queue.push(nei);
+            if (indegree[next] === 0) {
+                queue.push(next);
             }
         }
     }
 
-    return count === numCourses;
+    return completed === numCourses;
 };
