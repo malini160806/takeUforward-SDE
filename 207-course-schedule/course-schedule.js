@@ -14,7 +14,7 @@ var canFinish = function(numCourses, prerequisites) {
         indegree[course]++;
     }
 
-    // Queue of courses with no prerequisites
+    // Queue for courses with no prerequisites
     const queue = [];
 
     for (let i = 0; i < numCourses; i++) {
